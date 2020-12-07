@@ -1,0 +1,7 @@
+.form {
+    min-height: 700px;
+}
+
+.form>div>form {
+    margin-top: 200px;
+}
