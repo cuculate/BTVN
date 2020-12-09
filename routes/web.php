@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +16,16 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+
+Route::get('/login',[HomeController::class,'login'])->name('login');
+
+Route::post('/check-login',[HomeController::class,'authenticate'])->name('authenticate');
+
+Route::get('/logout',[HomeController::class,'logout'])->name('logout');
+
+
+Route::get('/post/{id}/show',[HomeController::class,'show'])->name('post.show');
+
+Route::middleware(['authenticate', 'admin.role'])->prefix('admin')->group(function () {
+    include ('admin/post.php');
+});
